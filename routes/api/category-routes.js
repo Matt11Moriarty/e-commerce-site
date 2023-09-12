@@ -29,6 +29,7 @@ router.post('/', async (req, res) => {
   // create a new category
   try {
     const categoryData = await Category.create(req.body);
+    res.status(200).json({message: `Category id:${categoryData.id} created.`})
   } catch (err) {
     res.status(500).json(err);
   }
@@ -37,16 +38,23 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    const categoryData = await Category.update(req.body, {
+    const categoryData = await Category.findByPk(req.params.id);
+    if (!categoryData) {
+      res.status(404).json({message: 'No category with this id!'});
+      return;
+    }
+
+    const [changedRows] = await Category.update(req.body, {
       where: {
         id: req.params.id
       }
     });
-    if (!categoryData[0]) {
-      res.status(404).json({message: 'No category with that ID'})
+    if (changedRows != 1) {
+      res.status(404).json({message: 'No changes made'})
       return;
     }
-    res.status(200).json(categoryData)
+
+    res.status(200).json({message: `Category name updated to ${req.body.category_name}`})
   } catch (err) {
     res.status(500).json(err)
   }
@@ -55,18 +63,19 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
-    const categoryData = await Category.destroy({
+    const {category_name} = await Category.findByPk(req.params.id)
+    const deletedRows = await Category.destroy({
       where: {
         id: req.params.id
       }
     });
-    if (!categoryData) {
+    if (!deletedRows) {
       res.status(404).json({message: 'No category with this id'});
       return;
     }
-    res.json(200).json(categoryData);
+    res.status(200).json({message: `Deleted the ${category_name} category`});
   } catch (err) {
-    res.json(500).json(err);
+    res.status(500).json(err);
   }
 });
 
