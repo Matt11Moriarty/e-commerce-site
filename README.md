@@ -29,7 +29,7 @@ N/A
 
 ## Usage
 
-Demo Recording: INSERT RECORDING LINK HERE
+Demo Recording: [Recording Link](https://drive.google.com/file/d/108ofGmN4zA9eWH05CPsf5fNnMiYdQgnf/view)
 
 1. Install dependencies and seed database
 2. Using the API:
