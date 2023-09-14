@@ -29,7 +29,7 @@ N/A
 
 ## Usage
 
-Demo Recording: [Recording Link](https://drive.google.com/file/d/108ofGmN4zA9eWH05CPsf5fNnMiYdQgnf/view)
+Demo Recording: [Recording Link](https://drive.google.com/file/d/1L3rNIlWfeoo36vg9kFiwgBbp6R7KobWS/view)
 
 1. Install dependencies and seed database
 2. Using the API:
