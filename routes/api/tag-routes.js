@@ -40,7 +40,7 @@ router.put('/:id', async (req, res) => {
   try {
     const tagData = await Tag.findByPk(req.params.id);
     if (!tagData) {
-      res.status(404).json({message: 'No tag exists with this id!'});
+      return res.status(404).json({message: 'No tag exists with this id!'});
     }
 
     const [changedRows] = await Tag.update(req.body, {
